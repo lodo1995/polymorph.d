@@ -21,7 +21,7 @@ struct _Foo
     {
         return "_Foo";
     }
-    @property int prop() { return 3; }
+    @property int prop() const { return assertAbstract!int; }
 }
 
 @PolymorphicWrapper("Bar")
@@ -36,7 +36,9 @@ struct _Bar
     {
         return "_Bar";
     }
-    @property int prop() { return 4; }
+    @property int prop() const { return 4; }
+    
+    auto myFun() inout { return bar; }
 }
 
 void main()
@@ -49,8 +51,8 @@ void main()
     assert(foobar.foo == 0);
     
     {
-        auto bar = cast(Bar)foobar;
-        assert(bar.virtualCall(1) == "_Bar");
+        auto bar = cast(const Bar)foobar;
+        // assert(bar.virtualCall(1) == "_Bar"); <-- ERROR: virtualCall can't be called on const Bar
         assert(bar.prop == 4);
         assert(bar.bar == bar.foo);
     }

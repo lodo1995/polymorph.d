@@ -15,7 +15,8 @@ classes from structs.
 `_A`, `_B` and `_C`; the wrappers' names will be `A`, `B` and `C`;
 * `mixin MakePolymorphicRefCountedHierarchy!(A, B, C);`: builds wrappers around structs `A`, `B` and `C`; the wrappers' names
 will be the ones specified via `@PolymorphicWrapper`;
-* `mixin MakePolymorphicRefCountedHierarchy!(mymodule);`: builds wrappers around all structs in `mymodule` marked with `@PolymorphicWrapper`.
+* `mixin MakePolymorphicRefCountedHierarchy!(mymodule);`: builds wrappers around all structs in `mymodule` marked with `@PolymorphicWrapper`;
+* function `assertAbstract`, to mark functions as abstract and get a nice error message if they are used (`abstract` can't be used on structs).
 
 ### An example
 
